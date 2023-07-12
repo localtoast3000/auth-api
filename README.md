@@ -1,10 +1,14 @@
-# Jason Web Token Authentication Server
+<h1>Jason Web Token Authentication API</h1>
 
-Node.js
-Express.js
-Mongoose.js
-Mongo DB
-Jason Web Tokens
+<ul>
+    <li>Node.js</li>
+    <li>Express.js</li>
+    <li>Mongoose.js</li>
+    <li>Mongo DB</li>
+    <li>Jason Web Tokens</li>
+</ul>
 
--- Dev --
-Babel
+<h4> -- DEV -- </h4>
+<ul>
+    <li>Babel</li>
+</ul>
