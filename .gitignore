@@ -111,9 +111,6 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
-# yarn
-yarn.lock
-
 # Optional npm cache directory
 .npm
 
