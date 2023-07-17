@@ -15,7 +15,6 @@ export default (() => {
     },
 
     createAccessToken(payload) {
-      console.log(payload);
       return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: process.env.ACESSS_TOKEN_EXPIRATION_TIME,
       });
