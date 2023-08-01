@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
-  "description": "An express built api for generating and storing session tokens using Jason Web Tokens",
+  "description": "An express.js api for generating and storing session tokens using Jason Web Tokens built with TypeScript",
   "author": {
     "name": "Craig Chick",
     "url": "https://github.com/localtoast3000"
