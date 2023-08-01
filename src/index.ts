@@ -9,27 +9,43 @@ import helmet from 'helmet';
 import logger from 'morgan';
 import chalk from 'chalk';
 import { tokensRouter } from '@/routes/exports';
-import connectToDatabase from '@/db/mongo_db_connector';
+import mongoDbConnector from '@/db/mongo_db_connector';
 import './task-runners';
 
-const PORT = process.env.PORT || '8000';
-const app = express();
+class ExpressApi {
+  private app: express.Application;
+  private PORT: string;
 
-connectToDatabase().catch((err) => console.log(err));
+  constructor() {
+    this.app = express();
+    this.PORT = String(process.env.PORT) || '8000';
+  }
 
-// EXPRESS MIDDLEWARE CONFIG
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(helmet());
-app.use(cors());
+  private database() {
+    mongoDbConnector().catch((err) => console.log(err));
+  }
+  private middleware() {
+    this.app.use(logger('dev'));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(helmet());
+    this.app.use(cors());
+  }
 
-// EXPRESS ROUTERS
-app.use('/tokens', tokensRouter);
+  private routes() {
+    this.app.use('/tokens', tokensRouter);
+  }
 
-// PORT LISTENER
-app.listen(PORT, () => {
-  console.log(`
-${chalk.cyanBright('SERVER LISTENING ON PORT:')} ${chalk.whiteBright(PORT)}
-`);
-});
+  public init() {
+    this.database();
+    this.middleware();
+    this.routes();
+    this.app.listen(this.PORT, () => {
+      console.log(`
+${chalk.cyanBright('SERVER LISTENING ON PORT:')} ${chalk.whiteBright(this.PORT)}
+    `);
+    });
+  }
+}
+
+export default new ExpressApi().init();
