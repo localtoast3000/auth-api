@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
+  "description": "An express built api for generating and storing session tokens using Jason Web Tokens",
+  "author": {
+    "name": "Craig Chick",
+    "url": "https://github.com/localtoast3000"
+  },
   "scripts": {
-    "start": "node dist index.js",
-    "build": "babel src -d dist --delete-dir-on-start --minified",
-    "babel-watch": "babel src --watch --out-dir dist --delete-dir-on-start --minified",
-    "dev": "nodemon -e * dist/index.js"
+    "build": "npx tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "yarn build && node ./dist/index.js",
+    "dev": "nodemon",
+    "exports-gen": "ts-node scripts/exports-generator src/controllers src/db/models src/middleware src/routes"
   },
   "dependencies": {
     "chalk": "4.1.2",
@@ -24,10 +29,16 @@
     "node-fetch": "^3.2.10"
   },
   "devDependencies": {
-    "@babel/cli": "^7.21.5",
-    "@babel/core": "^7.21.8",
-    "@babel/preset-env": "^7.21.5",
-    "babel-plugin-module-resolver": "^5.0.0",
-    "nodemon": "^2.0.19"
+    "@types/cors": "^2.8.13",
+    "@types/debug": "^4.1.8",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^20.4.5",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.7",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6"
   }
 }

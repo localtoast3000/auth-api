@@ -1,7 +1,12 @@
-import { Session } from '@/db/models';
+import { Session } from '@/db/models/exports';
 import jwt from '@/lib/jwt-util';
+import { RequestHandler } from 'express';
 
-export default (() => {
+interface TokensController {
+  [key: string]: RequestHandler;
+}
+
+const tokensController: TokensController = (() => {
   return {
     async generateTokens(req, res, next) {
       try {
@@ -81,3 +86,5 @@ export default (() => {
     },
   };
 })();
+
+export default tokensController;

@@ -8,7 +8,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import logger from 'morgan';
 import chalk from 'chalk';
-import { tokensRouter } from '@/routes';
+import { tokensRouter } from '@/routes/exports';
 import connectToDatabase from '@/db/mongo_db_connector';
 import './task-runners';
 

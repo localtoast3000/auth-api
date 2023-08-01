@@ -1,7 +1,13 @@
 import { validateBody } from '@/lib/input-validators';
 import jwt from '@/lib/jwt-util';
+import { RequestHandler } from 'express';
 
-export default (() => {
+interface ValidationMiddleware {
+  fields(expectedFields: string[]): RequestHandler;
+  accessToken: RequestHandler;
+}
+
+const validate: ValidationMiddleware = (() => {
   return {
     fields(expectedFields) {
       return (req, res, next) => {
@@ -33,3 +39,5 @@ export default (() => {
     },
   };
 })();
+
+export default validate;

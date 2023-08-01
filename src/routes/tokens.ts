@@ -1,8 +1,8 @@
 import { routerInstance } from '@/lib/express-util';
-import { validate, query } from '@/middleware';
+import { validate, query } from '@/middleware/exports';
 import controller from '@/controllers/tokens';
 
-export default routerInstance((router) => {
+const tokensRouter = routerInstance((router) => {
   router.post('/', validate.fields(['payload']), controller.generateTokens);
 
   router.post(
@@ -32,3 +32,5 @@ export default routerInstance((router) => {
     controller.removeSessionToken
   );
 });
+
+export default tokensRouter;

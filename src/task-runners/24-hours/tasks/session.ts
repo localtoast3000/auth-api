@@ -1,9 +1,13 @@
-import { Session } from '@/db/models';
+import { Session } from '@/db/models/exports';
 const { add } = require('date-fns');
+
+interface ExpireOptions {
+  days: number;
+}
 
 export default (() => {
   return {
-    async removeUnused(expires) {
+    async removeUnused(expires: ExpireOptions | undefined) {
       try {
         const thresholdDate = add(new Date(), expires || { days: -7 });
         const unusedSessions = await Session.find({

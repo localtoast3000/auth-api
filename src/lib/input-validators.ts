@@ -1,11 +1,11 @@
-export function validateText(val, minLength, maxLength) {
+export function validateText(val: string, minLength: number, maxLength: number) {
   return {
     required: !isNull(val),
     len: lengthInRange(val, minLength, maxLength),
   };
 }
 
-export function validateEmail(val) {
+export function validateEmail(val: string) {
   const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return {
     required: !isNull(val),
@@ -13,19 +13,19 @@ export function validateEmail(val) {
   };
 }
 
-export function lengthInRange(val, min, max) {
+export function lengthInRange(val: string, min: number, max: number) {
   return minLength(val, min) && maxLength(val, max);
 }
 
-export function minLength(val, length) {
+export function minLength(val: string, length: number) {
   return val.length < length ? false : true;
 }
 
-export function maxLength(val, length) {
+export function maxLength(val: string, length: number) {
   return val.length > length ? false : true;
 }
 
-export function isNull(val) {
+export function isNull(val: string) {
   return (
     [null, 'null', NaN, 'NaN', undefined, 'undefined', false, 'false', ''].includes(
       val
@@ -33,7 +33,17 @@ export function isNull(val) {
   );
 }
 
-export function validateBody({ body, expectedPropertys, allowNull = false }) {
+interface ValidateBodyOptions {
+  body: { [key: string]: any };
+  expectedPropertys: string[];
+  allowNull?: boolean;
+}
+
+export function validateBody({
+  body,
+  expectedPropertys,
+  allowNull = false,
+}: ValidateBodyOptions) {
   if (!body) return false;
   if (Object.keys(body).length !== expectedPropertys.length) return false;
   if (!Object.keys(body).every((key) => expectedPropertys.includes(key))) return false;

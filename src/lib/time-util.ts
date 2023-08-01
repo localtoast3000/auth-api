@@ -23,7 +23,7 @@
  * @throws {Error} If the time string format is invalid or the time unit is invalid.
  */
 
-export function convertTimeStringToMilliseconds(timeString) {
+export function convertTimeStringToMilliseconds(timeString: string) {
   const regex = /^(\d+)(ms|s|m|h|D|M|Y)$/;
 
   const match = timeString.match(regex);

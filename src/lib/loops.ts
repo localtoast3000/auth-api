@@ -17,6 +17,6 @@ import { convertTimeStringToMilliseconds } from './time-util';
  * @throws {Error} If the time string format is invalid or the time unit is invalid.
  */
 
-export default function runtimeLoop(cb, timeString) {
+export default function runtimeLoop(cb: () => void, timeString: string) {
   return setInterval(cb, convertTimeStringToMilliseconds(timeString));
 }

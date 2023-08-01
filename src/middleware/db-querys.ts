@@ -1,6 +1,11 @@
-import { Session } from '@/db/models';
+import { Session } from '@/db/models/exports';
+import { RequestHandler } from 'express';
 
-export default (() => {
+interface QueryMiddleware {
+  [key: string]: { [key: string]: RequestHandler };
+}
+
+const query: QueryMiddleware = (() => {
   return {
     session: {
       async exists(req, res, next) {
@@ -17,3 +22,5 @@ export default (() => {
     },
   };
 })();
+
+export default query;
